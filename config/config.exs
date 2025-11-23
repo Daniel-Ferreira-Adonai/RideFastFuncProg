@@ -11,6 +11,9 @@ config :ridefast,
   ecto_repos: [Ridefast.Repo],
   generators: [timestamp_type: :utc_datetime]
 
+  config :ridefast, RidefastWeb.Auth.Guardian,
+  issuer: "ridefast",
+  secret_key: "cMphaP9wY7f7h5o6plB4kDpVUxji8HHJM_U8ENou_deBncz6vl94A-aqN1FURgXT"
 # Configures the endpoint
 config :ridefast, RidefastWeb.Endpoint,
   url: [host: "localhost"],

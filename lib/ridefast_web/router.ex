@@ -1,11 +1,31 @@
 defmodule RidefastWeb.Router do
+  alias OpenApiSpex.Plug.{SwaggerUI, RenderSpec}
+
   use RidefastWeb, :router
 
   pipeline :api do
     plug :accepts, ["json"]
   end
+    pipeline :auth do
+    plug RidefastWeb.Auth.Pipeline
+  end
+#para rotas publicas
+  scope "/api/v1", RidefastWeb do
+  pipe_through :api
 
+  #post "/auth/login", AuthController, :login
+  post "/auth/register", AuthController, :register
+end
+#rotas fechadas
+scope "/api/v1", RidefastWeb do
+  pipe_through [:api, :auth] # <- olha o auth aq
+
+  #get "/users/me", UserController, :me
+end
   scope "/api", RidefastWeb do
+  options "/*path", RidefastWeb.CORSController, :options
+
+    # post "v1/auth/register", UserController, :register
     pipe_through :api
   end
 
