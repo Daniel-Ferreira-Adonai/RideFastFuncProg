@@ -7,7 +7,7 @@ defmodule Ridefast.Repo.Migrations.CreateUsers do
       add :email, :string
       add :phone, :string
       add :password_hash, :string
-
+      add :role , :string
       timestamps(inserted_at: :created_at)
     end
 

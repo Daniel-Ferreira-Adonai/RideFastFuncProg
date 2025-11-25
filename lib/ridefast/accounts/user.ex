@@ -7,15 +7,16 @@ defmodule Ridefast.Accounts.User do
     field :email, :string
     field :phone, :string
     field :password_hash, :string
-
+    field :role, :string
     timestamps(inserted_at: :created_at)
   end
 
   @doc false
   def changeset(user, attrs) do
     user
-    |> cast(attrs, [:name, :email, :phone, :password_hash])
-    |> validate_required([:name, :email, :phone, :password_hash])
+    |> cast(attrs, [:name, :email, :phone, :password_hash, :role])
+    |> validate_required([:name, :email, :phone, :password_hash, :role])
+    |> validate_inclusion(:role, ["user", "admin"])
     |> unique_constraint(:email)
   end
 

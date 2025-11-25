@@ -13,7 +13,9 @@ config :ridefast,
 
   config :ridefast, RidefastWeb.Auth.Guardian,
   issuer: "ridefast",
-  secret_key: "cMphaP9wY7f7h5o6plB4kDpVUxji8HHJM_U8ENou_deBncz6vl94A-aqN1FURgXT"
+  secret_key: "cMphaP9wY7f7h5o6plB4kDpVUxji8HHJM_U8ENou_deBncz6vl94A-aqN1FURgXT",
+  ttl: {1, :hour}
+
 # Configures the endpoint
 config :ridefast, RidefastWeb.Endpoint,
   url: [host: "localhost"],

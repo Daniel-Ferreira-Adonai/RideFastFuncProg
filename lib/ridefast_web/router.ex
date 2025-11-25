@@ -9,11 +9,29 @@ defmodule RidefastWeb.Router do
     pipeline :auth do
     plug RidefastWeb.Auth.Pipeline
   end
+  scope "/api/v1", RidefastWeb do
+  pipe_through [:api, :auth, RidefastWeb.Auth.EnsureAdmin]
+
+  get "/users", UserController, :index
+  get "/drivers", DriverController, :index
+end
+
+  scope "/api/v1", RidefastWeb do
+  pipe_through [:api, :auth, RidefastWeb.Auth.EnsureSelfOrAdmin]
+
+  put "/users/:id", UserController, :update
+  get "/users/:id", UserController, :show
+  delete "/users/:id", UserController, :delete
+  put "/drivers/:id", DriverController, :update
+  get "/drivers/:id", DriverController, :show
+  delete "/drivers/:id", DriverController, :delete
+end
+
 #para rotas publicas
   scope "/api/v1", RidefastWeb do
   pipe_through :api
 
-  #post "/auth/login", AuthController, :login
+  post "/auth/login", AuthController, :login
   post "/auth/register", AuthController, :register
 end
 #rotas fechadas
