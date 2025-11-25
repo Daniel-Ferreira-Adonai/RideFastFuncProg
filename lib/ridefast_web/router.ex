@@ -11,6 +11,8 @@ defmodule RidefastWeb.Router do
   end
   scope "/api/v1", RidefastWeb do
   pipe_through [:api, :auth, RidefastWeb.Auth.EnsureAdmin]
+  post "/drivers", AuthController, :register
+  post "/users", AuthController, :register
 
   get "/users", UserController, :index
   get "/drivers", DriverController, :index
