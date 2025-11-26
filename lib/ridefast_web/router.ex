@@ -24,9 +24,19 @@ end
   put "/users/:id", UserController, :update
   get "/users/:id", UserController, :show
   delete "/users/:id", UserController, :delete
+
   put "/drivers/:id", DriverController, :update
   get "/drivers/:id", DriverController, :show
   delete "/drivers/:id", DriverController, :delete
+
+  get "/drivers/:driver_id/profile", DriverProfileController, :show
+  post "/drivers/:driver_id/profile", DriverProfileController, :register
+  put "/drivers/:driver_id/profile", DriverProfileController, :update
+
+  post "/drivers/:driver_id/vehicles", VehicleController, :register
+  get "/drivers/:driver_id/vehicles", VehicleController, :show
+  put "/vehicles/:id", VehicleController, :update
+  delete "/vehicles/:id", VehicleController, :delete
 end
 
 #para rotas publicas

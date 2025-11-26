@@ -3,6 +3,8 @@ defmodule Ridefast.Accounts.Driver do
   import Ecto.Changeset
 
   schema "drivers" do
+    has_one :driver_profile, Ridefast.Accounts.DriverProfile
+
     field :name, :string
     field :email, :string
     field :phone, :string
